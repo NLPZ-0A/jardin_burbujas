@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const userRouter = require('./routes/userRouter');
 const app  = require('./index');
-const PORT =  process.env.PORT || 4000;
+const PORT =  PORT || 4000;
 
 //parseo del reques content
 app.use(express.urlencoded({extended :true}))
