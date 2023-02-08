@@ -4,6 +4,12 @@ const userController = require('../controllers/userController')
 const validator = require('../middlewares/validator')
 
 
+
+router.get('/', (req, res)=>{ 
+    console.log('en home');
+    return res.send({"message": "bienvenido"})
+});
+
 router.get('/home', (req, res)=>{ 
     console.log('en home');
     return res.send({"message": "bienvenido"})
