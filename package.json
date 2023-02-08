@@ -2,7 +2,7 @@
   "name": "jardin_burbujas",
   "version": "1.0.0",
   "description": "Proyecto de gestion backend para un instituto jardin de infantes.",
-  "main": "/src/server.js",
+  "main": "./src/server.js",
   "scripts": {
     "dev": "run server",
     "start": "nodemon server",
