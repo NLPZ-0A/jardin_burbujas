@@ -1,0 +1,70 @@
+<div class="panel-header panel-header-sm" style="display: flex; align-items: center; flex-direction: column-reverse;">
+  <div style="width: 80px;">
+    <img style="width: 60px;" src="/assets/img/logoWhite.png">
+  </div>
+  <h3 style="text-align: center; color: rgb(233, 227, 227);"><%= user.nombre %>, estás en el panel de Administración del Jardín Burbujas</h3>
+</div>
+
+<div class="test-container">
+
+    <form class="form-container">
+      <div class="form-group ">
+        <label for="nombre">Nombre*</label>
+        <input type="text" class="form-control" minlength="3" maxlength="40" id="nombre" placeholder="Jhon Doe..." >
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email*</label>
+        <input  type="text" class="form-control" minlength="5" maxlength="45"  id="email" placeholder="name@example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="telefono">telefono</label>
+        <input  type="text" class="form-control"   id="telefono" placeholder="5411234567...">
+      </div>
+
+      <div class="form-group">
+        <label for="asunto">Asunto</label>
+        <input type="text" class="form-control"  id="asunto" placeholder="horarios, actividades, etc...">
+      </div>
+    
+      <div class="form-group">
+        <label for="Mensaje">Mensaje*</label>
+        <textarea   style="background-color: aliceblue;" class="form-control" id="mensaje" rows="3" placeholder="Envio este mensaje para realizar una consulta sobre..." required></textarea>
+      </div>
+
+      <div class="form-group">
+        <button type="button" id="sendDataButton" class="btn btn-primary">Enviar</button>
+        <button type="button" id="cleanData" style="background-color: rgb(161, 161, 245);" class="btn btn-primary">Limpiar datos</button>
+      </div>
+    
+      
+  </form>
+
+  <div class="output-test">
+          ---Respuesta del servidor---
+
+          </br>
+          <div class="dataSetConsole">
+            <p  style="font-family: 'IBM Plex Mono', monospace;" class="inSimbol">\<%= user.username %>\admin ></p>  
+            <p style="font-family: 'IBM Plex Mono', monospace;">input: </p><p   style="font-family: 'IBM Plex Mono', monospace;"class="inputData"></p>
+
+            <p style="font-family: 'IBM Plex Mono', monospace;">output: </p><p  style="font-family: 'IBM Plex Mono', monospace;" class="outputData"></p>
+        </div>
+  </div>
+
+</div>
+
+<div class="info">
+  <p>En esta sección podrás testear el funcionamiento del backend y sus devoluciones respecto a cada llamada. Es por esto que del lado del cliente(usuarios) no se proporcionará ningún tipo de validación,</br> 
+    pues todos los campos se encuentran en texto plano. De esta manera se podrá verificar de forma eficiente las validaciones que realiza el servidor y así evitar la llegada de datos 
+    indeseados que podrían guardarse en la base de datos y arruinar la estructura de información de la misma.</p>
+
+        <p><b>Códigos HTTP 2XX/(200):</b> Significa que el estado de la respuesta del servidor es correcto y se procesó de forma correcta la información.</p>
+        <p><b>Códigos HTTP 4XX/(400):</b> Existe algún tipo de error a la hora de procesar los datos, ya sea por datos inválidos de cuerpo/cabecera/urls, etc.</p>
+        <p><b>Código HTTP 5XX(500):</b> Se ha recibido una solicitud no contemplada y por ende el servidor sufre una falla interna.</p>
+    
+        <p>(a tener en cuenta que estos errores son manejados de forma manual, por lo que a veces los códigos de estado no son realmente específicos, pero si dan una guía para hallar ciertos problemas)</p>
+</div>
+
+<script src="/js/testing.js"></script>

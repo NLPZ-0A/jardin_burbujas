@@ -1,0 +1,67 @@
+<div class="panel-header panel-header-sm" style="display: flex; align-items: center; flex-direction: column-reverse;">
+  <div style="width: 80px;">
+    <img style="width: 60px;" src="/assets/img/logoWhite.png">
+  </div>
+  <h3 style="text-align: center; color: rgb(233, 227, 227);"><%= user.nombre %>, estás en el panel de Administración del Jardín Burbujas</h3>
+</div>
+    <div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  id
+                </th>
+                <th>
+                 Nombre
+                </th>
+                <th>
+                  Username
+                </th>
+                <th>
+                  Rol
+                </th>
+              </thead>
+           
+              
+              <% if(users){ %>  
+                <h3>Usuarios</h3>
+                <% users.forEach(user => {  %>
+                  <tbody class="tbody content">
+                  <tr>
+                    <td >
+                      <%= user.id %> 
+                    </td>
+                    <td style="max-width: 100px;">
+                      <%= user.nombre %>
+                    </td>
+                    <td style="max-width: 100px;">
+                      <%= user.username %>
+                    </td>
+                    <td style="max-width: 100px;">
+                      <%= user.role %>
+                    </td>
+                    
+                  </tr>
+                </tbody>
+              
+                <% }) %>
+                <% } %> 
+            </table>
+          </div>
+        </div>
+              <!-- Button trigger modal -->
+
+      </div>
+    </div>
+    
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,399 @@
+    <!-- End Navbar -->
+    <div class="panel-header panel-header-sm" style="display: flex; align-items: center; flex-direction: column-reverse; ">
+      <div style="width: 80px;">
+        <img style="width: 60px;" src="/assets/img/logoWhite.png">
+      </div>
+      <h3 style="text-align: center; color: rgb(233, 227, 227);"><%= user.nombre %>, estás en el panel de Administración del Jardín Burbujas</h3>
+    </div>
+        <div class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th>
+                      id
+                    </th>
+                    <th>
+                     Nombre
+                    </th>
+                    <th>
+                      Email
+                    </th>
+                    <th>
+                      Teléfono
+                    </th>
+
+                    <th>
+                      Asunto
+                    </th>
+
+                    <th> 
+                      Mensaje
+                    </th>
+
+                    <th>
+                      Cod_reclamo
+                    </th>
+
+                    <th >
+                      Última actualización
+                    </th>
+                    <th class="text-right">
+                     Acción
+                    </th>
+                  </thead>
+               
+                  
+                  <% if(contacts){ %>  
+                    <h3>Tabla de contactos</h3>
+                    <% contacts.forEach(contact => {  %>
+                      <tbody class="tbody<%= contact.id %>  content">
+                      <tr>
+                        <td >
+                          <%= contact.id %> 
+                        </td>
+                        <td style="max-width: 100px;">
+                          <%= contact.nombre %>
+                        </td>
+                        <td style="max-width: 100px;">
+                          <%= contact.email %>
+                        </td>
+                        <td style="max-width: 100px;">
+                          <%= contact.telefono %>
+                        </td>
+                        <td>
+                          <%= contact.asunto %>
+                        </td>
+                        <td style="max-width: 300px;">
+                          <%= contact.mensaje %>
+                        </td>
+                        <td>
+                          <%= contact.cod_reclamo %>
+                        </td>
+                        <td ><!---->
+
+                          <%= contact.updatedAt %>
+
+                        </td>
+                      <td class="text-right">
+                          <button type="button" data-toggle="modal" data-target="#modal-<%= contact.id %>"  data-id="modal-<%= contact.id %> " id="deleteButton" class="btn btn-danger">Delete</button>
+                          <div style="padding: 4px;"></div>
+                          <button style="background-color: rgb(137, 189, 137); width: 100%;" type="button" data-toggle="modal" data-target="#modal-edit-<%= contact.id %>"  class="btn btn-default">Edit</button>
+                          <div style="padding: 4px;"></div>
+                          <button style="background-color: rgb(132, 181, 226); width: 100%;" type="button" class="btn btn-default">Ver</button>
+
+                      </td>
+
+
+                      </tr>
+
+
+                       <!-- Modal delete -->
+                      <div class="modal fade" id="modal-<%= contact.id %>" tabindex="-1" role="dialog" aria-labelledby="modal-<%= contact.id %>" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" style="color:rgb(255, 77, 77)" id="exampleModalCenterTitle"> Borrar Contacto</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p style="color:rgb(255, 77, 77)">¿Seguro desea borrar estos datos?</p>
+                            </div>
+                            <div class="modal-footer delete">
+                              <button type="button" style="background-color: rgb(137, 137, 243);" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                              <button type="button" data-id="<%= contact.id %>" id="deleteButtonData" class="btn btn-danger">Borrar</button>
+                            
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!--Modal form edit-->
+                      <div class="modal fade" id="modal-edit-<%= contact.id %>" tabindex="-1" role="dialog" aria-labelledby="modalForm" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Editar contacto</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body edit">
+
+
+                              <form>
+                                <div class="form-group edit">
+                                  <label for="nombre">Nombre*</label>
+                                  <input type="text" class="form-control" minlength="3" maxlength="40" id="nombreEditar<%= contact.id %>" placeholder="Jhon Doe..." value="<%= contact.nombre %>" required>
+                                </div>
+
+                                <div class="form-group edit">
+                                  <label for="email">Email*</label>
+                                  <input  type="email" class="form-control" minlength="5" maxlength="45"  id="emailEditar<%= contact.id %>" placeholder="name@example.com" value="<%= contact.email %> " required>
+                                </div>
+
+                                <div class="form-group edit">
+                                  <label for="telefono">telefono</label>
+                                  <input  type="text" class="form-control" minlength="10" maxlength="15"  id="telefonoEditar<%= contact.id %>" value="<%= contact.telefono %>" placeholder="5411234567...">
+                                </div>
+
+                                <div class="form-group edit">
+                                  <label for="asunto">Asunto</label>
+                                  <input type="text" class="form-control" minlength="4" maxlength="100"  id="asuntoEditar<%= contact.id %>" placeholder="horarios, actividades, etc..." value="<%= contact.asunto %>" >
+                                </div>
+                              
+                                <div class="form-group edit">
+                                  <label for="Mensaje">Mensaje*</label>
+                                  <textarea  minlength="10" maxlength="300"  style="background-color: aliceblue;" class="form-control" id="mensajeEditar<%= contact.id %>" rows="3" placeholder="Envio este mensaje para realizar una consulta sobre..." required><%= contact.mensaje%></textarea>
+                                </div>
+                            </form>
+
+
+                            </div>
+                            <div class="modal-footer edit">
+                              <button type="button"  class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                              <button type="button" data-id="<%= contact.id %>" id="sendDataEdit" style="background-color: rgb(137, 137, 243);" class="btn btn-primary">Editar datos</button>
+                            </div>
+
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </tbody>
+                  
+                    <% }) %>
+                    <% } %>
+
+                    
+
+                  
+                  
+                </table>
+
+                <button data-toggle="modal" data-target="#modalForm" style="background-color: rgb(137, 137, 243);" type="button"  id="addItem" class="btn btn-primary">Añadir item</button>
+                <button style="background-color: rgb(132, 196, 132);" type="button" id="updateItem"  class="btn btn-primary">Actualizar</button>
+              </div>
+            </div>
+                  <!-- Button trigger modal -->
+
+          </div>
+        </div>
+        <!--<div class="col-md-12">
+          <div class="card card-plain">
+            <div class="card-header">
+              <h4 class="card-title"> Table on Plain Background</h4>
+              <p class="category"> Here is a subtitle for this table</p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th>
+                      Name
+                    </th>
+                    <th>
+                      Country
+                    </th>
+                    <th>
+                      City
+                    </th>
+                    <th class="text-right">
+                      Salary
+                    </th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        Dakota Rice
+                      </td>
+                      <td>
+                        Niger
+                      </td>
+                      <td>
+                        Oud-Turnhout
+                      </td>
+                      <td class="text-right">
+                        $36,738
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Minerva Hooper
+                      </td>
+                      <td>
+                        Curaçao
+                      </td>
+                      <td>
+                        Sinaai-Waas
+                      </td>
+                      <td class="text-right">
+                        $23,789
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Sage Rodriguez
+                      </td>
+                      <td>
+                        Netherlands
+                      </td>
+                      <td>
+                        Baileux
+                      </td>
+                      <td class="text-right">
+                        $56,142
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Philip Chaney
+                      </td>
+                      <td>
+                        Korea, South
+                      </td>
+                      <td>
+                        Overland Park
+                      </td>
+                      <td class="text-right">
+                        $38,735
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Doris Greene
+                      </td>
+                      <td>
+                        Malawi
+                      </td>
+                      <td>
+                        Feldkirchen in Kärnten
+                      </td>
+                      <td class="text-right">
+                        $63,542
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Mason Porter
+                      </td>
+                      <td>
+                        Chile
+                      </td>
+                      <td>
+                        Gloucester
+                      </td>
+                      <td class="text-right">
+                        $78,615
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Jon Porter
+                      </td>
+                      <td>
+                        Portugal
+                      </td>
+                      <td>
+                        Gloucester
+                      </td>
+                      <td class="text-right">
+                        $98,615
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle"> Enhorabuen!!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        La operacián ha sido exitosa!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
+
+<!--Modal form addContact-->
+    <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modalForm" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Formulario de contacto</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body addContact">
+
+
+            <form>
+              <div class="form-group ">
+                <label for="nombre">Nombre*</label>
+                <input type="text" class="form-control" minlength="3" maxlength="40" id="nombre" placeholder="Jhon Doe..." required>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email*</label>
+                <input  type="email" class="form-control" minlength="5" maxlength="45"  id="email" placeholder="name@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="telefono">telefono</label>
+                <input  type="text" class="form-control" minlength="10" maxlength="15"  id="telefono" placeholder="5411234567...">
+              </div>
+
+              <div class="form-group">
+                <label for="asunto">Asunto</label>
+                <input type="text" class="form-control" minlength="4" maxlength="100"  id="asunto" placeholder="horarios, actividades, etc...">
+              </div>
+            
+              <div class="form-group">
+                <label for="Mensaje">Mensaje*</label>
+                <textarea  minlength="10" maxlength="300"  style="background-color: aliceblue;" class="form-control" id="mensaje" rows="3" placeholder="Envio este mensaje para realizar una consulta sobre..." required></textarea>
+              </div>
+           </form>
+
+
+          </div>
+          <div class="modal-footer addContact">
+            <button type="button"  class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            <button type="button" id="sendData" style="background-color: rgb(137, 137, 243);" class="btn btn-primary">Enviar datos</button>
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <script src="/js/crud.js"></script>
+
+   
