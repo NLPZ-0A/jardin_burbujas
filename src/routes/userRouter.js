@@ -18,5 +18,11 @@ router.get('/home', (req, res)=>{
 //maneja la ruta del recibo de informacion
 router.post('/sendForm', validator.validatorFormContact, userController.receiveFormContact);
 
+//manejar el registro del usuario
+router.post('/admin/register', userController.register);
+
+//manejo de login
+router.post('/admin/login', userController.login);
+
 
 module.exports = router;

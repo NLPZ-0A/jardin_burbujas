@@ -9,14 +9,14 @@ module.exports.validatorFormContact = async (req, res, next)=>{
         const message = await formValidation(req.body);
 
         if(message !== true){
-            return res.status(403).send({error: message});
+            return res.status(403).json({message: message});
         }else{
             next();
         }
 
     }catch(err){
         console.log(err);
-        return res.status(400);
+        return res.status(400).json({message: 'ha ocurrido un error al efectuar la peticion de validacion'});
     }
 };
 
@@ -38,9 +38,16 @@ const formValidation = async (data) => {
                 return 'El nombre debe contener al menos 3 caracteres y no puede ser completamente numerico';
             }
 
-            if(telefono.length > 15 || telefono.length < 10 && telefono.length > 0  &&  isNaN(Number(telefono))){
-                return 'numero de telefono invalido (no debe contener letras, debe tener un minimo de 10 caracteres y un máximo de 15)';
+            if(telefono.length > 15 || telefono.length < 10 && telefono.length > 0 ){
+                return 'numero de telefono invalido ( debe tener un minimo de 10 caracteres y un máximo de 15)';
             }
+
+            if(isNaN(Number(telefono))){
+                return 'numero de telefono invalido (debe contener solo caracteres númericos )';
+            }
+
+          console.log(isNaN(Number(telefono)));
+          console.log('is nann??');  
 
             if(String(asunto).length > 120 ){
                 return 'el asunto no debe de contener mas de 120 caracteres';
@@ -51,7 +58,7 @@ const formValidation = async (data) => {
 
     }catch(err){
        console.log(err);
-       return res.status(400)
+       return res.status(400).json({message : 'error en la validacion'});
     }
     
 };
