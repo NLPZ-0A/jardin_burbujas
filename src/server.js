@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const expressLayouts =  require('express-ejs-layouts');
 var cookieParser = require('cookie-parser')
+
 const path = require('path');
 const app  = require('./index');
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({extended : true}))
 
 //motor de plantillas
 app.set('view engine', 'ejs');
+app.engine('ejs', require('ejs').__express);
 app.set('views', (__dirname + '/views'));
 app.use(expressLayouts);
 app.use(express.static((__dirname + '/public')));
