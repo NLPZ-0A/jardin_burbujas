@@ -14,6 +14,12 @@ const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.USER, pro
         port : process.env.PORT_DB,
         dialect: 'mysql',
         dialectModule : mysql2,
+        dialectOptions: {
+          bigNumberStrings: true,
+          ssl: {
+            rejectUnauthorized: true,
+          }
+        },
         operatorsAliases: false,
         logging: false,//no ver los msj en consola sql
 });
