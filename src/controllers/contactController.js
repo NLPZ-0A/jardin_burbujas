@@ -1,5 +1,6 @@
 const Contacts = require("../models/Contact");
 
+
 // Get all contact
 const getContacts = (req, res) => {
   Contacts.findAll()

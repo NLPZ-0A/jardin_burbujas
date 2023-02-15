@@ -3,6 +3,7 @@ let isFetching = false;
 $(document).ready(function() {
 
     $(document).on('click', '.modal-footer.addContact #sendData', (e) => {
+        $('#onload').fadeIn();
         if(!isFetching){
             isFetching = true;
             console.log('enviando...');
@@ -22,6 +23,7 @@ $(document).ready(function() {
                     body : JSON.stringify(data)
                 })
                 .then(response =>{
+                    $('#onload').fadeOut();
                     if(response.ok ){
                         $('#modalForm').modal('hide');
                         $('#exampleModalCenter').modal('show');
@@ -32,6 +34,7 @@ $(document).ready(function() {
                     console.log(response);
                 })
                 .catch(err =>{
+                    $('#onload').fadeOut();
                     console.log(err);
                     isFetching = false;
             })
@@ -41,6 +44,7 @@ $(document).ready(function() {
     });
 
    $(document).on('click', '.modal-footer.delete #deleteButtonData', function() {
+    $('#onload').fadeIn();
        id= this.dataset.id.toString();
        console.log(id);
         if(!isFetching){
@@ -51,6 +55,7 @@ $(document).ready(function() {
                     method : 'DELETE',
                 })
                 .then(response =>{
+                    $('#onload').fadeOut();
                     if(response.ok ){
                         $(`#modal-${id}`).modal('hide');
                         $('#exampleModalCenter').modal('show');
@@ -62,6 +67,7 @@ $(document).ready(function() {
                     console.log(response);
                 })
                 .catch(err =>{
+                    $('#onload').fadeOut();
                     console.log(err);
                     isFetching = false;
             })
@@ -71,6 +77,7 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.modal-footer.edit #sendDataEdit', function() {
+        $('#onload').fadeIn();
         id= this.dataset.id.toString();
         console.log(id);
          if(!isFetching){
@@ -93,6 +100,7 @@ $(document).ready(function() {
                     body : JSON.stringify(data)
                 })
                 .then(response =>{
+                    $('#onload').fadeOut();
                     if(response.ok ){
                         $(`#modal-edit-${id}`).modal('hide');
                         $('#exampleModalCenter').modal('show');
@@ -105,6 +113,7 @@ $(document).ready(function() {
                     console.log(response);
                 })
                 .catch(err =>{
+                    $('#onload').fadeOut();
                     console.log(err);
                     isFetching = false;
             })

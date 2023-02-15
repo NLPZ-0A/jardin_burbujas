@@ -5,7 +5,8 @@ const sendButton = document.querySelector('.btn');
 
 
 const sendData = (data) => {
-    
+    $('#onload').fadeIn();
+
     fetch(`${location.origin}/admin/login`, {
         credentials : 'same-origin',
         headers     : { 
@@ -17,6 +18,7 @@ const sendData = (data) => {
         body   : JSON.stringify(data)
     })
     .then(response =>{
+        $('#onload').fadeOut();
         if(response.ok){
             location.replace('/admin/home')
         }

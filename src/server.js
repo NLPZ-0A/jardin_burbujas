@@ -1,7 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const expressLayouts =  require('express-ejs-layouts');
-var cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser')
+const { timeResponse } = require('./tools/performance.js');
 
 const path = require('path');
 const app  = require('./index');
@@ -21,6 +22,8 @@ app.set('views', (__dirname + '/views'));
 app.use(expressLayouts);
 app.use(express.static((__dirname + '/public')));
 
+//medidor de velocidad de respuesta
+//app.use(timeResponse);
 
 //Models 
 const User = require('./models/User');

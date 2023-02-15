@@ -7,6 +7,7 @@ $(document).ready(function() {
     $(document).on('click', ".test-container .form-container .form-group #sendDataButton", (e) => {
         e.preventDefault();
         if(!isFetching){
+            $('#onload').fadeIn();
             isFetching = true;
             console.log('enviando...');
             let dataSend = {
@@ -25,6 +26,7 @@ $(document).ready(function() {
                     body : JSON.stringify(dataSend)
                 })
                 .then(response =>{ 
+                    $('#onload').fadeOut();
                     isFetching = false;
                     return response.json().then(data => [response, data]);
                 })
@@ -34,12 +36,15 @@ $(document).ready(function() {
                      Status : ${response.status}</br>
                      StateOfRequest : ${response.ok} </br>
                      Mensaje del servidor: ${data.message}`
+                     
+                     console.log(response);
 
                      $('.inputData').html(JSON.stringify(dataSend));
                      $('.outputData').html(responseMessage);
 
                 })
                 .catch(err =>{
+                    $('#onload').fadeOut();
                   
                     $('.inputData').html(`El input enviado fue:</br> ${JSON.stringify(data)}`);
                     $('.outputData').html(`se ha producido un error del lado del cliente al enviar la solicitud /  ${err}}`);

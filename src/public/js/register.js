@@ -5,7 +5,7 @@ let password = document.querySelector('#password');
 const sendButton = document.querySelector('.btn');
 
 const sendData = (data) => {
-    
+    $('#onload').fadeIn();
     fetch(`${location.origin}/admin/register`, {
         credentials : 'same-origin',
         headers     : { 
@@ -17,12 +17,14 @@ const sendData = (data) => {
         body   : JSON.stringify(data)
     })
     .then(response =>{
+        $('#onload').fadeOut();
         if(response.ok){
             location.replace('/admin/login')
         }
         console.log(response);
     })
     .catch(error =>{
+        $('#onload').fadeOut();
         console.log(error);
         throw error;
     });
