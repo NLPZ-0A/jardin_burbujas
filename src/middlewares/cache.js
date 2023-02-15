@@ -2,7 +2,7 @@ const getExpeditiousCache = require('express-expeditious');
 
 const defaultOptions = {
     namespace : 'expresscache', //nombre de la cache en memoria
-    defaultTtl : 15*60*1000, //tiempo de respuesta(espera hasta un minuto, en ese tiempo trae la info directo de la ram)
+    defaultTtl : 20*60*1000, //tiempo de respuesta(espera hasta un minuto, en ese tiempo trae la info directo de la ram)
      statusCodeExpires : { //control de cache para el status
         404: 5*60*1000,
         500: 0 // 1 minute en miliseconds
