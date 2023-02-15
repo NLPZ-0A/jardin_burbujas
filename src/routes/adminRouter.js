@@ -9,7 +9,7 @@ router.get('/home',  isLoggedIn, checkRoleAuth(['admin']), adminController.admin
 router.get('/tables', isLoggedIn,  checkRoleAuth(['admin']), adminController.adminTablesView);
 router.get('/users', isLoggedIn, checkRoleAuth(['admin']), adminController.adminUsersView);
 router.get('/testing', isLoggedIn, checkRoleAuth(['admin']), adminController.adminTestingView);
-router.get('/loadingTestView', adminController.loadingAdminTestView)
+router.get('/loadingTestView', isLoggedIn, checkRoleAuth(['admin']), adminController.loadingAdminTestView)
 
 router.get('/login', adminController.loginAdminView);
 router.get('/register',  isLoggedIn, checkRoleAuth(['admin']), adminController.registerAdminView);
