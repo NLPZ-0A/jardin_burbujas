@@ -2,6 +2,15 @@ const Contacts = require("../models/Contact");
 const User = require("../models/User");
 
 //-------- views----------------------
+
+//---charge-server-test--------------
+
+const loadingAdminTestView = (req, res) => {
+    res.render('homeM')
+};
+
+
+
 const loginAdminView = (req, res) => {
     res.render('login',{layout : false})
 };
@@ -36,4 +45,4 @@ const adminTablesView = async(req, res) =>{
 
 
 
-module.exports = { adminHomeView, adminTablesView, loginAdminView,  registerAdminView, adminUsersView, adminTestingView }
+module.exports = { adminHomeView, adminTablesView, loginAdminView,  registerAdminView, adminUsersView, adminTestingView, loadingAdminTestView }
