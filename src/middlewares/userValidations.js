@@ -25,14 +25,14 @@ const formValidation = async (data) => {
     try{
         if(Object.values(data).length){
             const {name, username, email, password} = data;
-
+            
             const userRegex = /^[a-z0-9_-]{3,30}$/;
 
             if(validator.isEmpty(String(name)) || validator.isEmpty(String(email)) || validator.isEmpty(String(name)) || validator.isEmpty(String(password))){
                 return 'No se permiten estos campos vacios';
             }
 
-            if(!validateString(username, userRegex)){
+            if(!validateString(String(username).toLowerCase(), userRegex)){
                 return 'username invalido';
             }
 
