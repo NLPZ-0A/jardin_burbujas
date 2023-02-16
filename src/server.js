@@ -3,8 +3,7 @@ const session = require('cookie-session')
 const express = require('express');
 const expressLayouts =  require('express-ejs-layouts');
 const cookieParser = require('cookie-parser')
-const { timeResponse } = require('./tools/performance.js');
-//const session = require('express-session')
+const compression = require('compression')
 
 
 
@@ -13,22 +12,13 @@ const app  = require('./index');
 
 const port =  process.env.PORT || 3000;
 
+//agregamos compresion a las peticiones
+app.use(compression());
 
 //parseo del reques content
 app.use(express.json());
-app.use(express.urlencoded({extended : true}))
+app.use(express.urlencoded({extended : true}));
 
-//sessions
-/*app.use(session({
-    secret:'123456789',
-    resave : false, //se guara por cada peticion
-    saveUninitialized:false,// evita que se guarde en cada peticion
-    cookie: {
-       // secure: true, solo se envia a tráves de conexiones https
-        secure:false,
-        maxAge: 60*000// se escribe en milisegundos (60 *1000) 60 minutos
-      }
-}))*/
 app.set('trust proxy', 1);
 
 app.use(session({
@@ -46,9 +36,6 @@ app.engine('ejs', require('ejs').__express);
 app.set('views', (__dirname + '/views'));
 app.use(expressLayouts);
 app.use(express.static((__dirname + '/public')));
-
-//medidor de velocidad de respuesta
-//app.use(timeResponse);
 
 //Models 
 const User = require('./models/User');
