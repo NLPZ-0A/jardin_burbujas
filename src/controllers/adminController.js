@@ -3,16 +3,18 @@ const User = require("../models/User");
 
 //-------- views----------------------
 
-//---charge-server-test--------------
+//------------------charge-server-test--------------
 
 const loadingAdminTestView = (req, res) => {
     res.render('homeM')
 };
 
-
-
 const loginAdminView = (req, res) => {
+    //res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate'); // HTTP 1.1.
+    //res.setHeader('Pragma', 'no-cache'); // HTTP 1.0.
+    // res.setHeader('Expires', '0'); // Proxies.
     res.render('login',{layout : false})
+    return;
 };
 
 const registerAdminView = (req, res) => {

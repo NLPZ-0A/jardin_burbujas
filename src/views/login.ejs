@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
     <title>login</title>
     
     <!-- Jquery-->
@@ -29,11 +31,11 @@
                   <h3 class="mb-5">Iniciar Sesión</h3>
       
                   <div class="form-outline mb-4">
-                    <input name="username" type="username" id="username" placeholder="Nombre de usuario..." class="form-control form-control-lg" />
+                    <input name="username" type="username" id="username" placeholder="Nombre de usuario..." class="form-control form-control-lg"  required/>
                   </div>
       
                   <div class="form-outline mb-4">
-                    <input name="password" type="password" id="password" placeholder="contraseña..." class="form-control form-control-lg" />
+                    <input name="password" type="password" id="password" placeholder="contraseña..." class="form-control form-control-lg" required />
                   </div>
       
                   <!-- Checkbox -->
@@ -45,9 +47,12 @@
                   <p>Aún no tienes una cuenta? <a href="/admin/register">Registrate</a></p>
 
                   <button class="btn btn-info btn-lg btn-block" type="submit">Login</button>
+
+                  <p class="warnings login" id="warningsLogin" style="color: rgb(250, 62, 62);"></p>
       
                 </div>
               </div>
+                  
             </div>
           </div>
         </div>
@@ -60,6 +65,7 @@
       </div>
 
       <script src="/js/login.js"></script>
+      <script src="/js/loginValidator.js"></script>
       <script src="/js/charger.js"></script>
 </body>
 </html>

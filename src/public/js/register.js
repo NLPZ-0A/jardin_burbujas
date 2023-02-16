@@ -23,6 +23,10 @@ const sendData = (data) => {
         }
         console.log(response);
     })
+    .then(dataset =>{
+        console.log(dataset);
+        document.querySelector('#warningsRegister').innerHTML += dataset.message;
+    })
     .catch(error =>{
         $('#onload').fadeOut();
         console.log(error);

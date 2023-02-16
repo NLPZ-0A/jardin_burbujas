@@ -43,38 +43,32 @@ const register = async(req, res) => {
 //logica de login
 const login = async(req, res) => {
     try{
-        const { username, password } = req.body;
-        
-        //verificamos la existencia del usuario
-        const user = await User.findOne({ where :{ username : username}});
+        if(!req.session.login){
+            const { username, password } = req.body;
+            
+            //verificamos la existencia del usuario
+            const user = await User.findOne({ where :{ username : username}});
 
-        if(!user){
-           return res.status(401).json({error : 'este usuario no esta registrado'});
-        }
-        console.log(user);
-        console.log(user.password);
-        //comprobacion de contraseña
-        const passwordValid =  await bcrypt.compare(password.trim(), user.password.trim());
-        console.log(`el password de login es ${passwordValid}`);
+            if(!user){
+                return res.status(401).json({error : 'este usuario no esta registrado'});
+            }
 
-        if(!passwordValid){
-            return res.status(401).send({error : 'contraseña incorrecta'});
-        }
+            //validacion de contraseña
+            const passwordValid =  await bcrypt.compare(password.trim(), user.password.trim());
+            console.log(`el password de login es ${passwordValid}`);
 
-        console.log(`no llegue xq no soy valido`);
-        //token jwt
-        const token = getToken(user.id);
+            if(!passwordValid){
+                return res.status(401).send({error : 'contraseña incorrecta'});
+            }
+    
+            const token = getToken(user.id);
 
-        //opciones de la cookie que vamos a poner en el nav
-        const opcionesDelCookie = {
-            expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
-            httpOnly: true,
-        };
+            req.session.login = token; // y la asociamos al id del usuario
 
-        //cookie de login
-        res.cookie('login', token, opcionesDelCookie);
-        return res.status(200).json({succes : 'Has iniciado sesion!'});
-
+            return res.status(200).json({succes : 'Has iniciado sesion!'});
+        } 
+        console.log(req.session.login)
+        return res.redirect('/admin/home');
 
     }catch(err){
         console.log(err);
@@ -85,12 +79,14 @@ const login = async(req, res) => {
 //logica de logout
 const logout = async(req, res)=>{
     try{
-
-        res.cookie('login','',{maxAge:1});
-        return res.status(200).redirect('/login');
-
+        
+        if(req.session.login){
+            res.clearCookie('session');
+        }
+        return res.redirect('/admin/login');
+        
     }catch(err){
-        clg(err);
+        console.log(err);
         res.status(500).json({message: "error de servidor"});
     }
 };

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const  { isLoggedIn} = require('../middlewares/isLoggedIn');
 const  { checkRoleAuth }= require('../middlewares/roleAuth');
+const  { redirectioner } = require('../middlewares/redirecter');
 const adminController = require('../controllers/adminController');
 const {cacheInit} = require('../middlewares/cache');
 
@@ -13,7 +14,8 @@ router.get('/testing', isLoggedIn, checkRoleAuth(['admin']), cacheInit, adminCon
 router.get('/loadingTestView', isLoggedIn, checkRoleAuth(['admin']), adminController.loadingAdminTestView)
 
 router.get('/login', adminController.loginAdminView);
-router.get('/register',  isLoggedIn, checkRoleAuth(['admin']), adminController.registerAdminView);
+router.get('/register', adminController.registerAdminView);
+
 
 
 

@@ -6,7 +6,9 @@ const defaultOptions = {
      statusCodeExpires : { //control de cache para el status
         404: 5*60*1000,
         500: 0 // 1 minute en miliseconds
-    }
+    },
+   // engine: require('expeditious-engine-memory'),
+    exclude: ['/admin/login', '/admin/logout']
     /*engine: require('expeditious-engine-redis')(//npm install expeditious-engine redis
         {
             host:            conectar con redis

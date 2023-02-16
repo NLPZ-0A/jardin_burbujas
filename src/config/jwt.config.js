@@ -1,13 +1,14 @@
 const jwt = require('jsonwebtoken');
 
 const getToken= (id) =>{
-    return jwt.sign({id},  process.env.JWT_SECRET,{expiresIn: process.env.JWT_EXPIRES_IN});
+    return  jwt.sign({id},  process.env.JWT_SECRET,{expiresIn: process.env.JWT_EXPIRES_IN});
 };
 
-const getTokenData = (token) =>{
+const getTokenData =  (token) =>{
     let data = null;
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+
+    jwt.verify(token, process.env.JWT_SECRET,  (err, decoded) => {
 
         if(err){
             console.log('error al obtener el token');
@@ -17,7 +18,8 @@ const getTokenData = (token) =>{
 
     });
 
-    return data;
+
+    return  data;
 };
 
 module.exports ={
