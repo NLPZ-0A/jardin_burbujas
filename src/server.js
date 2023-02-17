@@ -4,9 +4,6 @@ const express = require('express');
 const expressLayouts =  require('express-ejs-layouts');
 const cookieParser = require('cookie-parser')
 const compression = require('compression')
-
-
-
 const path = require('path');
 const app  = require('./index');
 

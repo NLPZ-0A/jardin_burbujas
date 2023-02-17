@@ -4,8 +4,12 @@ let email = document.querySelector('#email');
 let password = document.querySelector('#password');
 const sendButton = document.querySelector('.btn');
 
+let warnings = '';
+
 const sendData = (data) => {
     $('#onload').fadeIn();
+    warnings = '';
+
     fetch(`${location.origin}/admin/register`, {
         credentials : 'same-origin',
         headers     : { 
@@ -22,10 +26,13 @@ const sendData = (data) => {
             location.replace('/admin/login')
         }
         console.log(response);
+
+        return response.json().then( dataset =>  [response, dataset ]);
     })
-    .then(dataset =>{
+    .then(([response, dataset ]) =>{
         console.log(dataset);
-        document.querySelector('#warningsRegister').innerHTML += dataset.message;
+        warnings += `${dataset.message}</br>`;
+        document.querySelector('#warningsRegister').innerHTML = warnings;
     })
     .catch(error =>{
         $('#onload').fadeOut();

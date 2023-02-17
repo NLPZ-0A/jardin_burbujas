@@ -50,17 +50,15 @@ const login = async(req, res) => {
             const user = await User.findOne({ where :{ username : username}});
 
             if(!user){
-                return res.status(401).json({error : 'este usuario no esta registrado'});
+                return res.status(401).json({message : 'este usuario no esta registrado'});
             }
 
             //validacion de contraseña
             const passwordValid =  await bcrypt.compare(password.trim(), user.password.trim());
-            console.log(`el password de login es ${passwordValid}`);
 
             if(!passwordValid){
-                return res.status(401).send({error : 'contraseña incorrecta'});
+                return res.status(401).json({message : 'contraseña incorrecta'});
             }
-    
             const token = getToken(user.id);
 
             req.session.login = token; // y la asociamos al id del usuario

@@ -28,7 +28,7 @@ submit.addEventListener('click', e =>{
         submitMessage = true;
     }
 
-    if(!validateString(String(usernameReg.value).toLowerCase(), userRegex.toLowerCase())){
+    if(!validateString(String(usernameReg.value).toLowerCase(), userRegex)){
         //username.style = 'border: solid red';
         warnings += `-El nombre de usuario para el registro no es valido <br>`;
         submitMessage = true;

@@ -1,11 +1,14 @@
 let username = document.querySelector('#username');
 let password = document.querySelector('#password');
+const warningP = document.querySelector('#warningsLogin');
+let warnings  = '';
 
 const sendButton = document.querySelector('.btn');
 
 
 const sendData = (data) => {
     $('#onload').fadeIn();
+    warnings = '';
 
     fetch(`${location.origin}/admin/login`, {
         credentials : 'same-origin',
@@ -19,10 +22,19 @@ const sendData = (data) => {
     })
     .then(response =>{
         $('#onload').fadeOut();
+        console.log(response)
         if(response.ok){
             location.replace('/admin/home')
         }
-        console.log(response);
+        return response.json().then( dataset =>  [response, dataset ]);
+    })
+    .then(([ response, dataSet]) => {
+        console.log(dataSet.message);
+        warnings += `${dataSet.message}</br>`;
+
+        if(warnings){
+            warningP.innerHTML = warnings
+         }
     })
     .catch(error =>{
         console.log(error);
