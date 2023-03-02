@@ -13,7 +13,7 @@ const configData = {
   port : process.env.PORT_DB,
   dialect: 'mysql',
   dialectModule : mysql2,
-  operatorsAliases: false,
+  operatorsAliases: 0,
   logging: false,//no ver los msj en consola sql
 }
 
