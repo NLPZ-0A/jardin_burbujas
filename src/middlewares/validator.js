@@ -47,6 +47,7 @@ const formValidation = async (data) => {
             }
 
           console.log(isNaN(Number(telefono)));
+          console.log(Number(telefono));
           console.log('is nann??');  
 
             if(String(asunto).length > 120 ){
