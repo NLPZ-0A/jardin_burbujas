@@ -4,17 +4,21 @@ const express = require('express');
 const expressLayouts =  require('express-ejs-layouts');
 const cookieParser = require('cookie-parser')
 const compression = require('compression')
+onst cors = require('cors');
 const path = require('path');
 const app  = require('./index');
 
 const port =  process.env.PORT || 3000;
 
+app.use(cors());
 //agregamos compresion a las peticiones
 app.use(compression());
+
 
 //parseo del reques content
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
+
 
 app.set('trust proxy', 1);
 
