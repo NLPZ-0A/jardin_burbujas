@@ -4,7 +4,7 @@ const express = require('express');
 const expressLayouts =  require('express-ejs-layouts');
 const cookieParser = require('cookie-parser')
 const compression = require('compression')
-onst cors = require('cors');
+const cors = require('cors');
 const path = require('path');
 const app  = require('./index');
 
