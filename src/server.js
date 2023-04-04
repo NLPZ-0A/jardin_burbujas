@@ -5,11 +5,13 @@ const expressLayouts =  require('express-ejs-layouts');
 const cookieParser = require('cookie-parser')
 const compression = require('compression')
 const cors = require('cors');
+const helmet = require('helmet');
 const path = require('path');
 const app  = require('./index');
 
 const port =  process.env.PORT || 3000;
 
+app.use(helmet.referrerPolicy({ policy: 'no-referrer' }));
 app.use(cors());
 //agregamos compresion a las peticiones
 app.use(compression());
